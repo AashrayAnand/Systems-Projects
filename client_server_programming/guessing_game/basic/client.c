@@ -21,7 +21,9 @@ int main(int argc, char * *argv){
   struct sockaddr_un address;
   // variable to store socket file descriptor
   unsigned int sock, ret;
-  // buffer for
+  // variable to hold user guesses, to send to server
+  int guess;
+  int resp;
   char buffer[BUFFER_SIZE];
 
   // create data socket of stream type, return file descriptor
@@ -40,7 +42,44 @@ int main(int argc, char * *argv){
     exit(EXIT_FAILURE);
   }
 
+  //clear the buffer
+  memset(buffer, 0, BUFFER_SIZE);
 
+  do{
+    memset(buffer, 0, BUFFER_SIZE);
+    printf("Enter a number between 1 and 1000: ");
+    int res;
+    scanf("%d", &guess);
+    // send data to the server
+    ret = write(sock, &guess, sizeof(int));
+    if(ret == -1){
+      perror("write");
+      exit(EXIT_FAILURE);
+    }
+    printf("Guess sent to the server was: %d\n", guess);
+    ret = read(sock, &resp, sizeof(int));
+
+    if(ret == -1){
+      perror("read");
+      exit(EXIT_FAILURE);
+    }
+
+    // if the value written to resp by the server is 1,
+    // exit the loop, as the correct  answer was received
+    if(resp){
+      break;
+    }
+  }while(1);
+
+  // receive results from server about guessing game
+  ret = read(sock, buffer, BUFFER_SIZE);
+  if(ret == -1){
+    perror("read");
+    exit(EXIT_FAILURE);
+  }
+
+  // output the answer and the number of guesses
+  printf("%s", buffer);
 
   return EXIT_SUCCESS;
 }
