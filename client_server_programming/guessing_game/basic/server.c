@@ -63,6 +63,8 @@ int main(int argc, char **argv){
     nguesses = 0;
     printf("waiting on accept() sys call\n");
 
+    // file descriptor returned for client which has sent a connection
+    // initiation request
     data_socket = accept(master_socket, NULL, NULL);
 
     if(data_socket == -1){

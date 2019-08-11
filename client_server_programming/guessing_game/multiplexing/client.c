@@ -47,7 +47,7 @@ int main(int argc, char * *argv){
 
   do{
     memset(buffer, 0, BUFFER_SIZE);
-    printf("Enter a number between 1 and 1000: ");
+    printf("Enter a number between 1 and 100: ");
     int res;
     scanf("%d", &guess);
     // send data to the server
