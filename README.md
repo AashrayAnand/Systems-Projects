@@ -5,30 +5,35 @@ This repository contains a set of systems projects I am undertaking, starting fr
 Roadmap:
 
 # Unix Utilities #
-7/2/19: cat (complete)
 
-7/3/19-7/4/19: grep (ongoing)
+*cat (complete)
+*cp (complete)
+*malloc/free (complete, but to-be-improved)
+*grep (to do)
+*zip (to do)
+*unzip (to do)
 
-7/5/19-7/7/19: zip (to do)
+# Random Functions #
 
-7/5/19-7/7/19: unzip (to do)
+*Directory Search: given a directory, searches and outputs text files to stdout (complete)
+*File Reverse: outputs a file in reverse to stdout (complete)
+*Tee: given a file, Writes all standard input to the file (complete)
+*Multithreaded directory search: using multithreading to recursively output data from subfolders of provided directory (to do)
 
-# Processes + Scheduling #
-7/10/19-7/17/19: Shell (to do)
+# Linux Interprocess Communication #
 
-# Virtual Memory #
-7/17/19-7/24/19: Memory Allocator (to do)
+*Client-Server game: implementation of a server, which can service up to 32 clients in a number guessing game, using Linux interprocess communication, specifically the Sockets API, and I/O multiplexing (complete)
 
-# Concurrency #
-7/24/19-7/31/19: Web Server (to do)
+# Network programming #
 
-8/1/19-8/8/19: Parallel Zip (to do)
+*simple chat: implementation of a simple, single-room chat server, able to service up to 32 clients in a chat room (to do)
+*IRC Protocol: implementation of the IRC protocol, using the Sockets API (to do, after simple chat)
+*ncat: implementation of the ncat command (to do)
+*HTTP Server: implementation of a basic HTTP server (to do)
+*multi-threaded Server: implementation of a more complex, multi-threaded server (to do, after HTTP Server)
 
-8/9/19-8/14/19: MapReduce (to do)
+# Other #
 
-# File System #
-8/15/19-8/22/19: File System Checker (to do)
+*Shell: implementation of a bash-like shell (to do)
 
-These projects will be completed in progression towards completing the ops-class.org
-online Operating Systems projects + the xv6 OS projects that accompany the book
-Operating Systems: Three Easy Pieces
+
