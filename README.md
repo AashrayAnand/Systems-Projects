@@ -7,10 +7,15 @@ Roadmap:
 # Unix Utilities #
 
 *cat (complete)
+
 *cp (complete)
+
 *malloc/free (complete, but to-be-improved)
+
 *grep (to do)
+
 *zip (to do)
+
 *unzip (to do)
 
 # Random Functions #
