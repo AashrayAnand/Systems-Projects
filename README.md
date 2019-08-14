@@ -2,7 +2,6 @@
 
 This repository contains a set of systems projects I am undertaking, starting from July of 2019
 
-Roadmap:
 
 # Unix Utilities #
 
