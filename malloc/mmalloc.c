@@ -1,6 +1,7 @@
 #include "definitions.h"
 
-void* head = NULL;
+head_t* head = NULL;
+head_t* tail = NULL;
 
 int main(int argc, char *argv[]){
   // pointer returned is at the start of the memory block, which is 1 byte,
@@ -10,12 +11,13 @@ int main(int argc, char *argv[]){
   void* y = mmalloc(24);
   printf("address of y (block of 1 byte): %p\n", y);
   assert((x + HEAD_SIZE + 24) == y);
-  printf("address of x + sizeof(Node) + 1 =  %p = address of y\n", (x + HEAD_SIZE + 3));
+  printf("address of x + sizeof(Node) + 24 =  %p = address of y\n", (x + HEAD_SIZE + 24));
+  printf("address of x is %p, address of x + 1 is %p\n", x, (x + 1));
   ffree(x);
   head_t* b = get_block(x);
   assert(b->node.free == 1);
-  printf("size of header: %d", HEAD_SIZE);
-  printf("size of node: %d", sizeof(b->node));
+  printf("size of header: %lu", HEAD_SIZE);
+  printf("size of node: %lu", sizeof(b->node));
   return 0;
 }
 
@@ -38,7 +40,7 @@ void ffree(void* ptr){
   }
 }
 
-head_t* request(head_t * last, size_t size){
+head_t* request(size_t size){
   head_t* block;
   // shift program break by size bytes + size of
   // node struct, and store the front of the new
@@ -51,10 +53,14 @@ head_t* request(head_t * last, size_t size){
     return NULL;
   }
 
-  // NULL for first request
-  if(last){
-    last->node.next = block;
+  // NULL for first request, otherwise, block
+  // added to tail of list
+  if(tail){
+    tail->node.next = block;
   }
+
+  // newly requested block will become the tail of the free list
+  tail = block;
 
   // set the fields of the block
   block->node.size = size;
@@ -64,10 +70,9 @@ head_t* request(head_t * last, size_t size){
   return block;
 }
 
-head_t* find_block(head_t* last, size_t size){
+head_t* find_block(size_t size){
   head_t* curr = head;
   while(curr && !(curr->node.size >= size && curr->node.free)){
-    last = curr;
     curr = curr->node.next;
   }
   // will be NULL if no appropriate blocks found
@@ -88,19 +93,19 @@ void *mmalloc(size_t size){
     return NULL;
   }
 
+  // first malloc request, no memory allocated
   if(!head){
-    block = request(NULL, size);
+    block = request(size);
     if(!block){
       return NULL;
     }
     head = block;
   } else {
-    head_t* ptr = head;
-    block = find_block(ptr, size);
+    block = find_block(size);
     // no block of suitable size was found, allocate
     // a new block instead
     if(!block){
-      block = request(ptr, size);
+      block = request(size);
       // failed to allocate new block
       if(!block){
         return NULL;

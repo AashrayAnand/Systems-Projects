@@ -1,5 +1,5 @@
-#include "../global_include.h"
-#include "../get_num.h"
+#include "../../global_include.h"
+#include "../../get_num.h"
 
 #ifndef B_M
 #define BYTE 1
