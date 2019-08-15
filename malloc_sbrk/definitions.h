@@ -4,9 +4,8 @@
 #include <unistd.h>
 #include <assert.h>
 
-
 // prototype for memory allocating function
-void *mmalloc(size_t);
+void *malloc(size_t);
 // prototype for memory freeing function
 void ffree(void *);
 
@@ -20,12 +19,17 @@ union header {
   struct {
     union header* next;
     size_t size;
-    short int free;
+    unsigned free;
   } node;
   ALIGN aligner;
 };
 
 typedef union header head_t;
+
+struct header_t {
+	size_t size;
+	unsigned is_free;
+};
 
 void split_block(head_t *);
 

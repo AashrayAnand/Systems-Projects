@@ -6,9 +6,9 @@ head_t* tail = NULL;
 int main(int argc, char *argv[]){
   // pointer returned is at the start of the memory block, which is 1 byte,
   // second pointer should be 1 + sizeof(Node *) higher address
-  void* x = mmalloc(24);
+  void* x = malloc(24);
   printf("address of x (block of 1 byte): %p\n", x);
-  void* y = mmalloc(24);
+  void* y = malloc(24);
   printf("address of y (block of 1 byte): %p\n", y);
   assert((x + HEAD_SIZE + 24) == y);
   printf("address of x + sizeof(Node) + 24 =  %p = address of y\n", (x + HEAD_SIZE + 24));
@@ -16,8 +16,8 @@ int main(int argc, char *argv[]){
   ffree(x);
   head_t* b = get_block(x);
   assert(b->node.free == 1);
-  printf("size of header: %lu", HEAD_SIZE);
-  printf("size of node: %lu", sizeof(b->node));
+  printf("size of header: %lu\n", HEAD_SIZE);
+  printf("size of header_t: %lu\n", sizeof(struct header_t));
   return 0;
 }
 
@@ -79,7 +79,7 @@ head_t* find_block(size_t size){
   return curr;
 }
 
-void *mmalloc(size_t size){
+void *malloc(size_t size){
   head_t* block;
   // malloc will be given a size, should either:
   // 0. return NULL for size <= 0

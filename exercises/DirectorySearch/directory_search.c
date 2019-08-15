@@ -7,7 +7,6 @@
 #define SLASH "/"
 
 int main(int argc, char *argv[]){
-
   if(argc < 2){
     fprintf(stderr, "usage: ./directory_search file-name\n");
     exit(1);
