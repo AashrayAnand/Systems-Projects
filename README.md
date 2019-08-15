@@ -2,33 +2,51 @@
 
 This repository contains a set of systems projects I am undertaking, starting from July of 2019
 
-Roadmap:
 
 # Unix Utilities #
-7/2/19: cat (complete)
 
-7/3/19-7/4/19: grep (ongoing)
+* [cat (complete)](https://github.com/AashrayAnand/Systems-Projects/tree/master/cat)
 
-7/5/19-7/7/19: zip (to do)
+* [cp (complete)](https://github.com/AashrayAnand/Systems-Projects/tree/master/cp)
 
-7/5/19-7/7/19: unzip (to do)
+* [malloc/free (complete, but to-be-improved)](https://github.com/AashrayAnand/Systems-Projects/tree/master/malloc)
 
-# Processes + Scheduling #
-7/10/19-7/17/19: Shell (to do)
+* grep (to do)
 
-# Virtual Memory #
-7/17/19-7/24/19: Memory Allocator (to do)
+* zip (to do)
 
-# Concurrency #
-7/24/19-7/31/19: Web Server (to do)
+* unzip (to do)
 
-8/1/19-8/8/19: Parallel Zip (to do)
+# Random Functions #
 
-8/9/19-8/14/19: MapReduce (to do)
+* [Directory Search](https://github.com/AashrayAnand/Systems-Projects/tree/master/exercises/DirectorySearch): given a directory, searches and outputs text files to stdout (complete)
 
-# File System #
-8/15/19-8/22/19: File System Checker (to do)
+* [File Reverse](https://github.com/AashrayAnand/Systems-Projects/tree/master/exercises/FileReverse): outputs a file in reverse to stdout (complete)
 
-These projects will be completed in progression towards completing the ops-class.org
-online Operating Systems projects + the xv6 OS projects that accompany the book
-Operating Systems: Three Easy Pieces
+* [Tee](https://github.com/AashrayAnand/Systems-Projects/tree/master/exercises/Tee): given a file, Writes all standard input to the file (complete)
+
+* Multithreaded directory search: using multithreading to recursively output data from subfolders of provided directory (to do)
+
+# Linux Interprocess Communication #
+
+* [Client-Server game](https://github.com/AashrayAnand/Systems-Projects/tree/master/client_server_programming/guessing_game): implementation of a server, which services clients in a number guessing game, using Linux interprocess communication, specifically the Sockets API. Implentations include a basic single-client server, and a server which can handle up to 32 clients, using multiplexing I/O (complete)
+
+* Shared memory IPC: some implementation of the shared memory IPC technique (to do)
+
+# Network programming #
+
+* simple chat: implementation of a simple, single-room chat server, able to service up to 32 clients in a chat room (to do)
+
+* IRC Protocol: implementation of the IRC protocol, using the Sockets API (to do, after simple chat)
+
+* ncat: implementation of the ncat command (to do)
+
+* HTTP Server: implementation of a basic HTTP server (to do)
+
+* multi-threaded Server: implementation of a more complex, multi-threaded server (to do, after HTTP Server)
+
+# Other #
+
+* Shell: implementation of a bash-like shell (to do)
+
+
