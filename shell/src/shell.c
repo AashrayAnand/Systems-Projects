@@ -1,8 +1,8 @@
 #include "shell.h"
 
 int main(int argc, char *argv[]){
-  int i;
   // array of char strings to store separated command
+
   char **command;
   // char string to read input to
   char *input;
@@ -15,17 +15,15 @@ int main(int argc, char *argv[]){
 
     printf("%s is input\n", input);
 
+    // parse arguments, returns array of string args
     command = parse_args(input);
 
     // print command
-    i = 0;
-    printf("command is: ");
-    while(command[i]){
-      printf("%s ", command[i++]);
-    }
-    printf("\n");
+    print_command(command);
 
     // execute command
-    execute_command(command);
+    if(command){
+      execute_command(command);
+    }
   }
 }
