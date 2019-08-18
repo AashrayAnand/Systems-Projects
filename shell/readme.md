@@ -2,8 +2,12 @@
 
 Both the shell and unit binaries can be compiled with make:
 
-`make shell
-./shell`
+```bash
+make shell
+./shell
+```
 
-`make test
-./unit`
+```bash
+make test
+./unit
+```
