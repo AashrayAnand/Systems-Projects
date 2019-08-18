@@ -16,11 +16,20 @@ make test
 
 This shell implementation currently only supports single commands (cannot chain commands with ';')
 
-This shell implementation assumes appropriate spacing (some white space) between command arguments (e.g. "echo abc > x.txt will work, but "echo abc>x.txt will not)
+This shell implementation assumes appropriate spacing (some white space) between 
+command arguments (e.g. "echo abc > x.txt will work, but "echo abc>x.txt will not)
 
 Some additional functionalities include:
 
 ```bash
-exit -> exit the terminal
-cd <DIR> -> change to specified DIR, go to $HOME otherwise
-I/O redirection -> can redirect output to file with '>' or '>>'
+exit --> exit the terminal
+
+cd <DIR> --> change to specified DIR, go to $HOME otherwise
+
+<CMD> > <FILE>  --> overwrites specified file with result of command
+
+<CMD> >> <FILE> --> appends result of command to specified file
+```
+
+In addition to the above implemented functionality, this shell generally supports any bash commands
+that rely on underlying binaries (e.g. ls, pwd, cat, echo etc.)
