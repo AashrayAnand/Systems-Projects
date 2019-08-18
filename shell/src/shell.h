@@ -9,4 +9,4 @@ void execute_command();
 // debuggin function for printing the string array command
 void print_command(char **);
 
-char** parse_args(char *);
+void parse_and_execute(char *);

@@ -1,32 +1,75 @@
 #include "shell.h"
 
-#define MAX_ARGS 10
 #define WS " "
+#define BUFF_SIZE 50
+#define MAX_ARGS 100
+
+// flags, which are set if command involves I/O
+// redirection, as well as if the redirection is
+// an overwrite or an append
+int redirect;
+// file descriptor, will be used to redirect output
+// if an I/O redirect is present in the command
+int fd;
 
 // error message
 char error_message[30] = "An error has occurred\n";
+
+void set_fd(char **input, int overwrite){
+  char *file;
+  if((file = strsep(input, WS)) == NULL){
+    printf("error with strsep in set_fd\n");
+    write_error();
+    return;
+  } else {
+    if(overwrite){
+      fd = open(file, O_CREAT|O_WRONLY|O_TRUNC);
+    } else {
+      fd = open(file, O_CREAT|O_WRONLY|O_APPEND);
+    }
+    if(fd == -1){
+      printf("error with opening file %s\n", file);
+      printf("Error opening file: %s\n", strerror( errno ));
+      write_error();
+      return;
+    }
+  }
+  printf("successfully created fd for file %s\n", file);
+}
 
 void execute_command(char **command){
   // used to store status of executed command
   int status;
   // terminate shell on exit command
+
   if(strcmp(command[0], "exit") == 0){
     printf("goodbye!\n");
     exit(EXIT_SUCCESS);
   }
 
   if(strcmp(command[0], "cd") == 0){
+    // change directory to provided argument
     if(command[1]){
       status = chdir(command[1]);
+    // if no argument provided, change to
+    // the user's HOME env
     } else {
       status = chdir(getenv("HOME"));
     }
     if(status == -1){
       write_error();
     }
+
+    free(command);
     return;
   }
+
   if(fork() == 0){
+    if(redirect){
+      // create duplicate of stdout file descriptor, using
+      // dup2 to assign it to fd created for out file
+      dup2(fd, STDOUT_FILENO);
+    }
     // execute command in child process, for fault-tolerance
     execvp(command[0], command);
   } else {
@@ -37,12 +80,15 @@ void execute_command(char **command){
 // given an input char string, parses the arguments of the string,
 // and returns an array of char strings that represent the command
 // broken up into pieces
-char** parse_args(char *input){
+void parse_and_execute(char *input){
+  // set redirect flag to 0
+  redirect = 0;
   if(input && strlen(input) > 0){
+    char **command = (char **) malloc(sizeof(char *)*MAX_ARGS);
     // malloc space
-    char **command = malloc(sizeof(char *)*MAX_ARGS);
     char *arg;
     int i = 0;
+    memset(command, 0, sizeof(char *) * MAX_ARGS);
     // add arguments to command
     while((arg = strsep(&input, WS)) != NULL && i < MAX_ARGS - 1){
       // keep separating on whitespace while the
@@ -55,6 +101,7 @@ char** parse_args(char *input){
       // the command we have parsed thus far, then clear
       // the command and start parsing any further arguments
       // as a new command e.g echo a;echo b is 2 commands
+      /*
       if(strcmp(&arg[len_arg - 1], ";") == 0){
         // get command up until semicolon, if it was not
         // the only character in the parsed argument
@@ -66,23 +113,29 @@ char** parse_args(char *input){
         // the parsed command to make way for next command
         execute_command(command);
         memset(command, 0, sizeof(char *)*MAX_ARGS);
-      }
+      }*/
       if(strcmp(&arg[len_arg - 2], ">>") == 0){
-        command[i++] = strsep(&arg, ">>");
-        command[i++] = ">>";
+        redirect = 1;
+        set_fd(&input, 0);
       } else if(strcmp(&arg[len_arg - 1], ">") == 0){
-        command[i++] = strsep(&arg, ">>");
-        command[i++] = ">";
+        redirect = 1;
+        printf("input before set_fd %s\n", input);
+        set_fd(&input, 1);
+        printf("input after set_fd %s\n", input);
       } else {
         command[i++] = arg;
       }
     }
+
     // null terminate the string
     command[i] = NULL;
-    return command;
-  }
+    if(command){
+      execute_command(command);
+    }
 
-  return NULL;
+    // free parsed command after execution
+    free(command);
+  }
 }
 
 // error printing function
