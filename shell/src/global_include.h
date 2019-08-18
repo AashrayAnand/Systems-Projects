@@ -13,6 +13,10 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#define WS " "
+#define BUFF_SIZE 50
+#define MAX_ARGS 100
+
 typedef enum { FALSE, TRUE } Boolean;
 #define min(m,n) ((m) < (n) ? (m) : (n))
 #define max(m,n) ((m) > (n) ? (m) : (n))

@@ -1,8 +1,5 @@
 #include "shell.h"
 
-#define WS " "
-#define BUFF_SIZE 50
-#define MAX_ARGS 100
 
 // flags, which are set if command involves I/O
 // redirection, as well as if the redirection is
