@@ -29,7 +29,7 @@ This repository contains a set of systems projects I am undertaking, starting fr
 
 # Linux Interprocess Communication #
 
-* [Client-Server game](https://github.com/AashrayAnand/Systems-Projects/tree/master/client_server_programming/guessing_game): implementation of a server, which services clients in a number guessing game, using Linux interprocess communication, specifically the Sockets API. Implentations include a basic single-client server, and a server which can handle up to 32 clients, using multiplexing I/O (complete)
+* [Client-Server Model game](https://github.com/AashrayAnand/Systems-Projects/tree/master/client_server_programming/guessing_game): implementation of a server, which services clients in a number guessing game, using Linux interprocess communication, specifically, UNIX domain sockets. Implentations include a basic single-client server, and a server which can handle up to 32 clients, using multiplexing I/O (complete)
 
 * Shared memory IPC: some implementation of the shared memory IPC technique (to do)
 
