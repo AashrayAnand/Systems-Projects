@@ -11,3 +11,16 @@ make shell
 make test
 ./unit
 ```
+
+## Restrictions ##
+
+This shell implementation currently only supports single commands (cannot chain commands with ';')
+
+This shell implementation assumes appropriate spacing (some white space) between command arguments (e.g. "echo abc > x.txt will work, but "echo abc>x.txt will not)
+
+Some additional functionalities include:
+
+```bash
+exit -> exit the terminal
+cd <DIR> -> change to specified DIR, go to $HOME otherwise
+I/O redirection -> can redirect output to file with '>' or '>>'
