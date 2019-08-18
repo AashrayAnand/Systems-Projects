@@ -47,6 +47,6 @@ This repository contains a set of systems projects I am undertaking, starting fr
 
 # Other #
 
-* [$ash Shell](https://github.com/AashrayAnand/Systems-Projects/tree/master/shell): implementation of a bsh-like shell (in progress)
+* [ash$ Shell](https://github.com/AashrayAnand/Systems-Projects/tree/master/shell): implementation of a bsh-like shell (in progress)
 
 
