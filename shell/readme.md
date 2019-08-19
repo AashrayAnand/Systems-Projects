@@ -33,6 +33,6 @@ cd <DIR> --> change to specified DIR, go to $HOME otherwise
 
 ## Restrictions ##
 
-*This shell implementation currently only supports single commands (cannot chain commands with ';'),
+This shell implementation currently only supports single commands (cannot chain commands with ';'),
 and assumes there is appropriate spacing (some white space) between
-command arguments (e.g. "echo abc > x.txt will work, but "echo abc>x.txt will not)*
+command arguments (e.g. "echo abc > x.txt will work, but "echo abc>x.txt will not)
