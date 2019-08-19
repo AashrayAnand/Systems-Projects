@@ -56,8 +56,6 @@ void execute_command(char **command){
     if(status == -1){
       write_error();
     }
-
-    free(command);
     return;
   }
 
@@ -71,6 +69,39 @@ void execute_command(char **command){
     execvp(command[0], command);
   } else {
     wait(&status);
+  }
+}
+
+void execute_piped_command(char **first_cmd, char **sec_cmd){
+  int status;
+  // pipe file descriptor, 0 is read end, 1 is write end
+  int pipefd[2];
+
+  if(strcmp(first_cmd[0], "exit") == 0){
+    printf("goodbye!\n");
+    exit(EXIT_SUCCESS);
+  }
+
+  // create pipe, return on failure
+  if(pipe(pipefd) == -1){
+    write_error();
+    return;
+  }
+
+  if(fork() == 0){
+    close(pipefd[0]);
+    dup2(pipefd[1], STDOUT_FILENO);
+    close(pipefd[1]);
+    execvp(first_cmd[0], first_cmd);
+  } else {
+    if(fork() == 0){
+      close(pipefd[1]);
+      dup2(pipefd[0], STDIN_FILENO);
+      close(pipefd[0]);
+      execvp(sec_cmd[0], sec_cmd);
+    } else {
+      wait(&status);
+    }
   }
 }
 
@@ -119,6 +150,21 @@ void parse_and_execute(char *input){
         printf("input before set_fd %s\n", input);
         set_fd(&input, 1);
         printf("input after set_fd %s\n", input);
+      } else if(strcmp(&arg[len_arg - 1], "|") == 0){
+        // null terminate first part of input
+        // create pipefd to communicate and parse
+        // second set of args, sending output
+        // from first to second
+        command[i] = NULL;
+        i = 0;
+        char **second_command = (char **) malloc(sizeof(char *)*MAX_ARGS);
+        while((arg = strsep(&input, WS)) != NULL && i < MAX_ARGS - 1){
+          second_command[i++] = arg;
+        }
+        second_command[i] = NULL;
+        execute_piped_command(command, second_command);
+        free(second_command);
+        goto piped;
       } else {
         command[i++] = arg;
       }
@@ -130,6 +176,7 @@ void parse_and_execute(char *input){
       execute_command(command);
     }
 
+    piped:
     // free parsed command after execution
     free(command);
   }
