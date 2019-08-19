@@ -16,12 +16,9 @@ make test
 
 ## Restrictions ##
 
-This shell implementation currently only supports single commands (cannot chain commands with ';')
-
-*This shell implementation assumes appropriate spacing (some white space) between
+This shell implementation currently only supports single commands (cannot chain commands with ';'),
+and assumes there is appropriate spacing (some white space) between
 command arguments (e.g. "echo abc > x.txt will work, but "echo abc>x.txt will not)*
-
-Some additional functionalities include:
 
 ```
 exit --> exit the terminal
