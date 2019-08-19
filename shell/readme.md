@@ -1,13 +1,15 @@
 # Usage #
 
-Both the shell and unit binaries can be compiled with make:
+Both the shell and unit test binaries can be compiled with make:
 
 ```bash
+make clean
 make shell
 ./shell
 ```
 
 ```bash
+make clean
 make test
 ./unit
 ```
@@ -29,6 +31,8 @@ cd <DIR> --> change to specified DIR, go to $HOME otherwise
 <CMD> > <FILE>  --> overwrites specified file with result of command
 
 <CMD> >> <FILE> --> appends result of command to specified file
+
+<CMD> | <CMD2> --> pipes CMD output to CMD2 input
 ```
 
 > In addition to the above implemented functionality, this shell generally supports any bash commands
