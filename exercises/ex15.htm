@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)https://courses.cs.washington.edu/courses/cse333/19su/assignments/exercises/15.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="https://courses.cs.washington.edu/courses/cse333/19su/site/img/CSEWordmark_sm.png">
+
+  <title>Exercise 15 - CSE 333</title>
+
+  <link href="./ex15_files/css" rel="stylesheet" type="text/css">
+  <link href="./ex15_files/css(1)" rel="stylesheet" type="text/css">
+
+
+  <link href="./ex15_files/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./ex15_files/main.css">
+</head>
+
+<body>
+  <header class="site-header"><!--
+This is the navbar html which should appear on all pages.
+It should be loaded into every page header using javascript.
+Edit this file with your course title, number, year and quarter, URL, and 
+customize your menu headings.
+For details see: https://getbootstrap.com/docs/3.3/components/#navbar
+-->
+<div class="navbar navbar-inverse navbar-fixed-top cse333-navbar">
+  <div class="container-fluid cse333-navbar-content">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://courses.cs.washington.edu/courses/cse333/19su/">CSE 333: Systems Programming</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <nav>
+      <ul class="nav navbar-nav">
+        <li class="">
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/">Home</a>
+        </li>
+        <li>
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/calendar">Calendar</a>
+        </li>
+        <li class="active">
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/assignments">Assignments</a>
+        </li>
+        <li>
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/exams">Exams</a>
+        </li>
+        <li>
+          <a href="https://piazza.com/class/jx2gmci8lr15ti"><span class="glyphicon glyphicon-new-window link-icon"></span>Message Board</a>
+        </li>
+      </ul>
+        </nav>
+      <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
+        <li><a>19su</a></li>
+      </ul>
+    </div><!-- /.nav-collapse -->
+  </div><!-- /.container -->
+</div><!-- /.navbar -->
+</header>
+
+  <div class="container">
+
+    <!-- Begin page content -->
+
+    <h1>CSE333 Exercise 15</h1>
+
+    <p class="afterh">
+    <b>Out:</b> &nbsp; Monday, August 12, 2019<br>
+    <b>Due:</b> &nbsp; Wednesday, August 14, 2019 by <span class="red-text">10:30 am</span>
+    </p>
+
+    <section id="goals"><br>
+      <div class="panel panel-default">
+          <div class="panel-heading"><h3>Goals</h3></div>
+          <div class="panel-body">
+              <ul>
+                  <li>Write a server-side program</li>
+              </ul>
+          </div>
+      </div>
+      </section>
+  
+  
+      <div class="unspacepanel"></div>
+  
+  
+      <section id="descr"><br>
+      <div class="panel panel-default">
+          <div class="panel-heading"><h3>Ex14 Companion Server</h3></div>
+          <div class="panel-body">
+  
+    <p>
+       Write the server to go along with ex14.  More specifically, write
+       a C++ program called "ex15" that accepts one  command line
+       argument: a port number to listen to.
+       </p><p>
+  
+       The program should create a TCP listening socket on the supplied port
+       number.  Once a client connects, the program should read data
+       from the connected client socket and write it to stdout until
+       there is no more data to read from the client (i.e., until EOF
+       or a socket error occurs).  Once all of the data has been read
+       and written, the program should close the client socket and the
+       listening socket, and then exit.
+       </p><p>
+  
+       To test your program, try running it on a specific attu machine,
+       say attu4.cs.washington.edu,
+       and use your ex14 binary to send it a file.  For example, on
+       attu4.cs.washington.edu, run the following command:
+  
+       </p><pre><code><b>bash$</b> ./ex15 5555 &gt; output.bytes</code></pre>
+       <p>
+  
+       Then, on some client machine, pick a file to send to your server.
+       For example, this command will send the 'ex14' binary to the
+       server (assuming that the server is running on attu4):
+  
+       </p><pre><code><b>bash$</b> ./ex14 attu4.cs.washington.edu 5555 ex14</code></pre>
+       <p>
+       
+       Once the file has transferred, you should use <code>md5sum</code> to verify
+       that the file was sent correctly.  For example, on the server,
+       run this:
+  
+       </p><pre><code><b>bash$</b> md5sum output.bytes</code></pre>
+       <p>
+       
+       and on the client, run this:
+       </p><pre><code><b>bash$</b> md5sum ex14</code></pre>
+       <p>
+       and you should see the same MD5 signature printed out on both ends.
+  
+       </p><p>
+       There are a few requirements on your code:
+       </p><ul>
+         <li> You should modularize it nicely; consider splitting it
+         into multiple source files if that makes sense, for example by isolating all of the
+         network-specific code in a module.
+           <p>
+  
+         </p></li><li> You should use read() to read from the input client socket.
+         Pay attention to the possibility that read might
+         return EINTR, and it might read less than you ask for.
+         We recommend writing some utility functions to deal with this.
+         Feel free to use fwrite() to write to stdout.
+         <p>
+  
+         </p></li><li> Write a <strong>Makefile</strong> so that we can compile your code by
+         typing "make".  Your makefile should produce an executable binary called <code>ex15</code>.
+       </li></ul>
+    <p>
+  As with the previous exercise,
+  feel free to adapt sample code from lecture and section as part of your solution if it helps,
+  but be sure you understand what your code does when you're done.
+  
+          </p></div>
+      </div>
+      </section>
+  
+  
+      <section id="submit"><br>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Submission</h3></div>
+            <div class="panel-body">
+    
+      <p><b>For this exercise, you choose what files to split your code into. Make sure to submit a <code>Makefile</code> we can use to compile your code into an executable called <code>ex15</code></b></p>
+  
+      <p>Your code must:
+      </p><ul>
+      
+      <li>Compile with no warnings when <code>make</code> is run.
+      </li>
+    
+        <li> Have a comment at the top of each source file with your name,
+        student number, and CSE or UW email address</li>
+    
+        <li> Have no crashes, memory leaks, or memory errors on CSE linux machines</li>
+     
+        <li>Follow the style guidelines we covered in class, including
+        naming conventions for classes, methods, and instance variables;
+    proper use of const; and  appropriate comments. 
+    If in doubt, follow the Google C++ style guide, 
+    and <a href="https://courses.cs.washington.edu/courses/cse333/19su/assignments/exercises/code/cpplint.py">cpplint.py</a> may be helpful in flagging potential
+    style problems.  (You can ignore cpplint complaints about using-directives and
+    about header guards that do not contain full file paths names.)</li>
+        
+    <li> Be pretty: the formatting, modularization, variable and
+        function names, and so on must make us smile rather than cry.</li>
+      <li> Be robust: you should think about handling bogus input
+        from the user, and you should handle hard-to-handle cases
+        (if there are any) gracefully</li>
+      </ul>
+
+      <p>
+        Submit your code on <a class="external" href="https://www.gradescope.com/"><button type="button" class="btn btn-default btn-xs link-button"><img class="link-icon" src="./ex15_files/icon_gradescope.png"> Gradescope</button></a>
+       </p>
+    
+        </div>
+      </div>
+    </section>
+
+  <!-- End page content -->
+
+  </div>
+
+  <footer class="site-footer"><!-- Insert the same footer on all pages -->
+<div class="cse-wordmark"><img src="./ex15_files/CSEWordmark_sm.png" alt="CSE Wordmark"></div>
+<div class="site-footer-right">
+    <a href="https://www.washington.edu/online/terms/">UW Site Use Agreement</a>
+</div>    
+</footer>
+
+  <script src="./ex15_files/jquery.min.js"></script>
+  <script src="./ex15_files/bootstrap.min.js"></script>
+  <script src="./ex15_files/nav-bar.js"></script>
+  <script src="./ex15_files/footer.js"></script>
+
+
+</body></html>

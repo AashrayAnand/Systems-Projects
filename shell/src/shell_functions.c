@@ -93,6 +93,7 @@ void execute_piped_command(char **first_cmd, char **sec_cmd){
     dup2(pipefd[1], STDOUT_FILENO);
     close(pipefd[1]);
     execvp(first_cmd[0], first_cmd);
+    printf("process ended\n");
   } else {
     if(fork() == 0){
       close(pipefd[1]);

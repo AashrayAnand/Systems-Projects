@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)https://courses.cs.washington.edu/courses/cse333/19su/assignments/exercises/13.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="https://courses.cs.washington.edu/courses/cse333/19su/site/img/CSEWordmark_sm.png">
+
+  <title>Exercise 13 - CSE 333</title>
+
+  <link href="./ex13_files/css" rel="stylesheet" type="text/css">
+  <link href="./ex13_files/css(1)" rel="stylesheet" type="text/css">
+
+
+  <link href="./ex13_files/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./ex13_files/main.css">
+</head>
+
+<body>
+  <header class="site-header"><!--
+This is the navbar html which should appear on all pages.
+It should be loaded into every page header using javascript.
+Edit this file with your course title, number, year and quarter, URL, and 
+customize your menu headings.
+For details see: https://getbootstrap.com/docs/3.3/components/#navbar
+-->
+<div class="navbar navbar-inverse navbar-fixed-top cse333-navbar">
+  <div class="container-fluid cse333-navbar-content">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://courses.cs.washington.edu/courses/cse333/19su/">CSE 333: Systems Programming</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <nav>
+      <ul class="nav navbar-nav">
+        <li class="">
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/">Home</a>
+        </li>
+        <li>
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/calendar">Calendar</a>
+        </li>
+        <li class="active">
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/assignments">Assignments</a>
+        </li>
+        <li>
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/exams">Exams</a>
+        </li>
+        <li>
+          <a href="https://piazza.com/class/jx2gmci8lr15ti"><span class="glyphicon glyphicon-new-window link-icon"></span>Message Board</a>
+        </li>
+      </ul>
+        </nav>
+      <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
+        <li><a>19su</a></li>
+      </ul>
+    </div><!-- /.nav-collapse -->
+  </div><!-- /.container -->
+</div><!-- /.navbar -->
+</header>
+
+  <div class="container">
+
+    <!-- Begin page content -->
+
+    <h1>CSE333 Exercise 13</h1>
+
+    <p class="afterh">
+    <b>Out:</b> &nbsp; Monday, August 5, 2019<br>
+    <b>Due:</b> &nbsp; Wednesday, August 7, 2019 by <span class="red-text">10:30 am</span>
+    </p>
+
+    <section id="goals"><br>
+      <div class="panel panel-default">
+          <div class="panel-heading"><h3>Goals</h3></div>
+          <div class="panel-body">
+              <ul>
+                  <li>Practice with inheritance and subclassing in C++</li>
+              </ul>
+          </div>
+      </div>
+      </section>
+  
+  
+      <div class="unspacepanel"></div>
+  
+  
+      <section id="descr"><br>
+      <div class="panel panel-default">
+          <div class="panel-heading"><h3>Coordinate Classes</h3></div>
+          <div class="panel-body">
+  
+       <p>
+       Write a C++ program with the following classes:
+       </p>
+  
+       <ul>
+  
+         <li> in a file called Coordinate.h, define a purely virtual
+         class (i.e., one with no implemented methods) called Coordinate
+         that represents an abstract 2-dimensional coordinate. Your
+         class must have a (pure virtual) method called ToString that
+         returns a string representation.
+  
+           <blockquote>
+  *Look in the C++ Primer or the lecture slides for details about
+  pure virtual classes, i.e., C++'s version of abstract classes.
+  Such classes must  contain only abstract method definitions, which in C++
+  are called "pure virtual methods" and are declared by giving a method
+  heading and "= 0;" in place of the method body.
+  </blockquote>
+  
+         <p>
+  
+         </p></li><li> In files Cartesian.h and Cartesian.cc, create a subclass
+         of Coordinate called Cartesian that represents a 2D cartesian
+         coordinate (i.e., one with x and y values). Implement ToString,
+         and also add a method called Distance that calculates the
+         distance between the object and a second Cartesian point object
+         passed by reference as an argument.
+         <p>
+  
+         </p></li><li> In files Polar.h and Polar.cc, create a subclass of
+         Coordinate that represents a 2D polar coordinate (i.e., one
+         with a radius and angle). Implement ToString and also add
+         Distance, where the Distance method calculates the distance
+         between the object and a second Polar object.
+         <p>
+  
+         </p></li><li> In file ex13.cc, write a main function that tries out your classes. You do not need to write formal test cases,
+           but you should try to be thorough with how you exercise your classes. Simply printing output or programmatically checking
+           the result and printing success/failure are both fine.
+
+  
+       </li></ul>
+  
+          </div>
+      </div>
+      </section>
+  
+  
+      <section id="submit"><br>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Submission</h3></div>
+            <div class="panel-body">
+    
+      <p><b>For this exercise, you will submit 6 (relatively short!) files: </b></p><ul><b>
+          <li><code>Coordinate.h</code></li>
+          <li><code>Cartesian.h</code></li>
+          <li><code>Cartesian.cc</code></li>
+          <li><code>Polar.h</code></li>
+          <li><code>Polar.cc</code></li>
+          <li><code>ex13.cc</code></li>
+      </b></ul><p></p>
+  
+      <p>Your code must:
+      </p><ul>
+      
+      <li>Compile with no warnings. You do not need to submit a Makefile, although you may find it
+        convenient to make one for your own local use.
+      </li>
+    
+        <li> Have a comment at the top of each source file with your name,
+        student number, and CSE or UW email address</li>
+    
+        <li> Have no crashes, memory leaks, or memory errors on CSE linux machines</li>
+     
+        <li>Follow the style guidelines we covered in class, including
+        naming conventions for classes, methods, and instance variables;
+    proper use of const; and  appropriate comments. 
+    If in doubt, follow the Google C++ style guide, 
+    and <a href="https://courses.cs.washington.edu/courses/cse333/19su/assignments/exercises/code/cpplint.py">cpplint.py</a> may be helpful in flagging potential
+    style problems.  (You can ignore cpplint complaints about using-directives and
+    about header guards that do not contain full file paths names.)</li>
+        
+    <li> Be pretty: the formatting, modularization, variable and
+        function names, and so on must make us smile rather than cry.</li>
+      <li> Be robust: you should think about handling bogus input
+        from the user, and you should handle hard-to-handle cases
+        (if there are any) gracefully</li>
+      </ul>
+
+      <p>
+        Submit your code on <a class="external" href="https://www.gradescope.com/"><button type="button" class="btn btn-default btn-xs link-button"><img class="link-icon" src="./ex13_files/icon_gradescope.png"> Gradescope</button></a>
+       </p>
+    
+        </div>
+      </div>
+    </section>
+
+  <!-- End page content -->
+
+  </div>
+
+  <footer class="site-footer"><!-- Insert the same footer on all pages -->
+<div class="cse-wordmark"><img src="./ex13_files/CSEWordmark_sm.png" alt="CSE Wordmark"></div>
+<div class="site-footer-right">
+    <a href="https://www.washington.edu/online/terms/">UW Site Use Agreement</a>
+</div>    
+</footer>
+
+  <script src="./ex13_files/jquery.min.js"></script>
+  <script src="./ex13_files/bootstrap.min.js"></script>
+  <script src="./ex13_files/nav-bar.js"></script>
+  <script src="./ex13_files/footer.js"></script>
+
+
+</body></html>
