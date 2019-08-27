@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)https://courses.cs.washington.edu/courses/cse333/19su/assignments/exercises/10.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="https://courses.cs.washington.edu/courses/cse333/19su/site/img/CSEWordmark_sm.png">
+
+  <title>Exercise 10 - CSE 333</title>
+
+  <link href="./ex10_files/css" rel="stylesheet" type="text/css">
+  <link href="./ex10_files/css(1)" rel="stylesheet" type="text/css">
+
+
+  <link href="./ex10_files/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./ex10_files/main.css">
+</head>
+
+<body>
+  <header class="site-header"><!--
+This is the navbar html which should appear on all pages.
+It should be loaded into every page header using javascript.
+Edit this file with your course title, number, year and quarter, URL, and 
+customize your menu headings.
+For details see: https://getbootstrap.com/docs/3.3/components/#navbar
+-->
+<div class="navbar navbar-inverse navbar-fixed-top cse333-navbar">
+  <div class="container-fluid cse333-navbar-content">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://courses.cs.washington.edu/courses/cse333/19su/">CSE 333: Systems Programming</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <nav>
+      <ul class="nav navbar-nav">
+        <li class="">
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/">Home</a>
+        </li>
+        <li>
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/calendar">Calendar</a>
+        </li>
+        <li class="active">
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/assignments">Assignments</a>
+        </li>
+        <li>
+          <a href="https://courses.cs.washington.edu/courses/cse333/19su/exams">Exams</a>
+        </li>
+        <li>
+          <a href="https://piazza.com/class/jx2gmci8lr15ti"><span class="glyphicon glyphicon-new-window link-icon"></span>Message Board</a>
+        </li>
+      </ul>
+        </nav>
+      <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
+        <li><a>19su</a></li>
+      </ul>
+    </div><!-- /.nav-collapse -->
+  </div><!-- /.container -->
+</div><!-- /.navbar -->
+</header>
+
+  <div class="container">
+
+    <!-- Begin page content -->
+
+    <h1>CSE333 Exercise 10</h1>
+
+    <p class="afterh">
+    <b>Out:</b> &nbsp; Monday, July 22, 2019<br>
+    <b>Due:</b> &nbsp; Wednesday, July 24, 2019 by <span class="red-text">10:30 am</span>
+    </p>
+
+    <section id="goals"><br>
+      <div class="panel panel-default">
+          <div class="panel-heading"><h3>Goals</h3></div>
+          <div class="panel-body">
+            <ul>
+              <li>Practice with arrays and memory allocation in C++</li>
+              <li>Additional practice with operator overloading</li>
+          </ul>
+          </div>
+      </div>
+      </section>  
+  
+      <section id="descr"><br>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Vectors Revisited</h3></div>
+            <div class="panel-body">
+    
+    <p>In this exercise, you will submit a C++ called Vector that builds on your Vector class from the previous
+      exercise in two ways:
+      </p><ol>
+        <li>Changing the internal </li>
+        <li>Expanding the functionality of the class by adding support for the * operator. In particular, you will add * between two Vectors to support the dot product, and * between a Vector and a double to support </li>
+      </ol>
+    <p>
+    
+    </p><ul>
+    <li>In file <code>Vector.h</code> declare a class Vector with the following
+    properties:<p>
+    
+    </p><ul>
+    <li class="update">The representation of a Vector should be an array containing
+    three <code>float</code>s giving the magnitudes in the x, y, and z
+    directions.  The array should be dynamically allocated on the heap
+    when a Vector is created and deleted when the Vector no longer
+    exists.</li>
+    
+    <li>There should be a default (0-argument) constructor that
+    initializes a Vector to (0,0,0), a constructor with 3 floats as
+    parameters giving initial values for the x, y, and z magnitudes, and a
+    copy constructor.</li>
+    
+    <li>There should be a destructor that does whatever
+    work is needed when a Vector object is deleted.  If no work is needed,
+    the body of the destructor should be empty.</li>
+    
+    <li>The class should define assignment on vectors (<code>u = v</code>).</li>
+    
+    <li>The class should define updating assignment on vectors (<code>u += v</code> and <code>u -= v</code>)
+    that perform element-by-element addition or subtraction of the vector
+    components.</li>
+    
+    <li>Operators + and - should be overloaded so that <code>u + v</code> and <code>u - v</code> return
+    new Vectors that are the sum and difference of Vectors u and v,
+    respectively.</li>
+    
+    <li><b>(NEW in ex10)</b> Operator * should compute the inner product (dot product) of two
+    Vectors.  If v1=(a,b,c) and v2=(d,e,f), then v1*v2 should return the
+    scalar value a*d+b*e+c*f.</li>
+    
+    <li><b>(NEW in ex10)</b> Operator * should be overloaded so that if v is the Vector (a,b,c)
+    and k is a double, then v*k and k*v should return new Vectors containing
+    the components of v multiplied by k (i.e., (a*k,b*k,c*k)). Hint: Remember that there is no constructor for Vector that takes
+    only a single double, and that the reason the posted Complex example can get away with only defining addition between two
+    Complex objects is that C++ can automatically follow one "level" of a constructor call to match a function signature. Since
+    that isn't possible here, think about how you'll support both k * Vector and Vector * k.</li>
+    
+    <li>The class should define stream output so that s&lt;&lt;v will
+    write Vector v to stream s as (a,b,c), i.e., a left parentheses
+    followed by the x, y, and z components of v separated by commas, and a
+    right parentheses.  There should be no added spaces in the
+    output.</li>
+    
+    <li>The Vector class and associated functions should be placed in a
+    namespace <code>vector333</code>.</li>
+    
+    </ul>
+    <br>
+    Note that several of these functions are required to return new
+    Vectors.  This means actual Vector values, not pointers to Vectors
+    that have been allocated elsewhere.
+    <p>
+    </p></li>
+    
+    <li>In file <code>Vector.cc</code> implement this class.<p></p></li>
+    
+    <li>In file <code>ex10.cc</code> write a main program that
+    demonstrates that your Vector class works properly.  The output format
+    is up to you, but it should be labeled neatly and should be concise so
+    it can be read with pleasure, not pain.
+    Feel free to write <code>using namespace vector333;</code>
+    in your test program so you don't need to type <code>vector333::</code>
+    repeatedly.<p></p></li>
+    
+    <li>Create a suitable Makefile. The command "make" should build an
+    executable program ex10, recompiling individual files only when
+    needed. The command "make clean" should remove the ex10 executable,
+    all .o files, and any editor or other backup files whose names end in
+    ~ . </li>
+    
+    </ul>
+    <p></p>
+    
+    <p>You may find it helpful to start with your code or the sample
+    solution from the previous exercise (ex9) and modify it as needed to
+    use the new array representation for the Vector data.</p>
+    
+            </div>
+        </div>
+        </section>
+  
+      <section id="submit"><br>
+      <div class="panel panel-default">
+          <div class="panel-heading"><h3>Submission</h3></div>
+          <div class="panel-body">
+  
+    <p><b>Files you will submit: <code>ex10.cc, Vector.cc, Vector.h, Makefile</code></b></p>
+
+    <p>Your code must:
+    </p><ul>
+    
+    <li>Have a Makefile as described above that compiles code with the g++
+    options -Wall -std=c++11 -g. </li>
+  
+      <li> Have a comment at the top of your source files with your name,
+      student number, and CSE or UW email address</li>
+  
+      <li> Have no crashes, memory leaks, or memory errors on CSE linux machines</li>
+   
+      <li>Follow the style guidelines we covered in class, including
+      naming conventions for classes, methods, and instance variables;
+  proper use of const; and  appropriate comments. 
+  If in doubt, follow the Google C++ style guide, 
+  and <a href="https://courses.cs.washington.edu/courses/cse333/19su/assignments/exercises/code/cpplint.py">cpplint.py</a> may be helpful in flagging potential
+  style problems.  (You can ignore cpplint complaints about using-directives and
+  about header guards that do not contain full file paths names.)</li>
+      
+  <li> Be pretty: the formatting, modularization, variable and
+      function names, and so on must make us smile rather than cry. Some issues can be checked using the provided C++ linter <a class="external" href="https://courses.cs.washington.edu/courses/cse333/19su/assignments/exercises/code/cpplint.py">cpplint.py</a>
+      – at a minimum you should have no C++ linter warnings, although you need to think about how to format your code well for each specific exercise.</li>
+    <li> Be robust: you should think about handling bogus input
+      from the user, and you should handle hard-to-handle cases
+      (if there are any) gracefully</li>
+    </ul>
+  
+      </div>
+    </div>
+  </section>
+
+  <!-- End page content -->
+
+  </div>
+
+  <footer class="site-footer"><!-- Insert the same footer on all pages -->
+<div class="cse-wordmark"><img src="./ex10_files/CSEWordmark_sm.png" alt="CSE Wordmark"></div>
+<div class="site-footer-right">
+    <a href="https://www.washington.edu/online/terms/">UW Site Use Agreement</a>
+</div>    
+</footer>
+
+  <script src="./ex10_files/jquery.min.js"></script>
+  <script src="./ex10_files/bootstrap.min.js"></script>
+  <script src="./ex10_files/nav-bar.js"></script>
+  <script src="./ex10_files/footer.js"></script>
+
+
+</body></html>
